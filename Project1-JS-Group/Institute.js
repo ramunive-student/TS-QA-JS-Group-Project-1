@@ -5,9 +5,23 @@ try {
 
     const s1 = new Students(20, 'qA', 'deePAk', 's1@test.com', 'USA');
     s1.getProfile('S103');
+    s1.getProfile('S101');
+
+    console.log('******************');
 
     const s2 = new Students(22, 'pm', 'sTudent tWO', 's2@test.com', 'CAN');
-    s2.getProfile();
+    s2.dropFromCourse('S200');
+    s2.getProfile('S102');
+    console.log('****************** Expected: invalid student Id');
+    s2.studentData.sStatus = 'Not Enrolled';
+    s2.dropFromCourse('S102');
+    s2.getProfile('S102');
+    console.log('****************** Expected: You are not enrolled in a course - status = Not Enrolled');
+    s2.studentData.sStatus = 'Enrolled';
+    s2.dropFromCourse('S102');
+    s2.getProfile('S102');
+    console.log('****************** Expected: We will miss you - status = Dropped');
+    
 
     const s4 = new Students(12, 'Qa');
     s4.getProfile();
