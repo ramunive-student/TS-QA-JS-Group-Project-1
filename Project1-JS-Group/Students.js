@@ -207,7 +207,25 @@ class Students extends Members {
      *          show message, You have entered invalid student-id
      */
 
+     dropFromCourse(providedStudentId){
+
+
+        if (this.studentData.sId === providedStudentId){
+            if(this.studentData.sStatus.toLowerCase().localeCompare('Enrolled'.toLocaleLowerCase()) === 0){
+                this.studentData.sStatus = 'Dropped';
+                console.log('\nWe will miss you; hope you join our future batch\n');
+            }else{
+                console.log('\nYou are not currently enrolled in a course\n');
+            }
+        } else{
+            console.log(`\nYou have entered an invalid student-id. Student-id entered was ${providedStudentId}\n`);
+
+
+        }
 
     }
 
-    module.exports = Students; 
+}
+
+
+module.exports = Students; 
