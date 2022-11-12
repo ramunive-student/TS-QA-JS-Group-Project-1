@@ -127,6 +127,28 @@ class Students extends Members {
      * 
      */
 
+ 
+
+    getProfile(providedStudentId) {
+
+        if (this.studentData.sId === providedStudentId){
+            console.log(
+                `\n\t:::: Profile :::
+                Id: ${this.studentData.sId}
+                Name: ${this.memberData.mName}
+                Email: ${this.memberData.mEmail}
+                Balance: ${this.studentData.sBalance}
+                Status: ${this.studentData.sStatus}
+                ----------------------\n`
+            );
+         } else{
+             console.log(`\nYou have entered an invalid student-id. Student-id entered was ${providedStudentId}\n`);
+
+
+         }
+    }
+        
+
      // changeName********************************************************************************************************************************
     // Programmer: Serkan
     /**
