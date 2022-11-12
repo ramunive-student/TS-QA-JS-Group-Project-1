@@ -140,6 +140,19 @@ class Students extends Members {
      *      show message -> You have entered invalid id. Invalid id: SXXX
      */
 
+     changeName (newStudentName, studentId){
+        if ( studentId === this.studentData.sId){
+            if (newStudentName !== this.memberData.mName){
+                this.memberData.mName = newStudentName;
+                console.log(`Name is changed to '${newStudentName}' successfully`);
+            } else {
+                console.log('You are already registered with same name.');
+            }
+        } else {
+            console.log(`You have entered invalid id. Invalid id: ${studentId}`);
+        }       
+    }
+
     // changeCourse*******************************************************************************************************************************
     // Programmer: Dren
     /**
