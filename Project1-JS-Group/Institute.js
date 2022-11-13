@@ -24,10 +24,10 @@ try {
     
 
     const s4 = new Students(12, 'Qa');
-    s4.getProfile();
+    //s4.getProfile();
 
     const s3 = new Students(18, 'Qa', 'StudeNT tHReE', 's3@test.com', 'TX');
-    s3.getProfile();
+    //s3.getProfile();
 
 } catch (e) {
 
