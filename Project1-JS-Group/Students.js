@@ -31,19 +31,7 @@ class Students extends Members {
         sBalance: 0,
         sGrade: '',
     }
-    // studentData = {
-    //     sName: '',
-    //     sAge: '',
-    //     sId: '',
-    //     sEmail: '',
-    //     sGrade: '',
-    //     sAddress: '',
-    //     sCourseDetails: {
-    //         sCourseName: '',
-    //         sTopicsCovered: '',
-    //         sBalance: '',
-    //     },
-    // }
+    
 
     static studentIdTracker = 100;
 
@@ -108,6 +96,12 @@ class Students extends Members {
      *      returns undefined
      * 
      */
+
+         verifyCourseName(courseName) {
+            return courseData.find(
+                cData => cData.cName.toUpperCase().localeCompare(courseName.toUpperCase()) === 0
+            )
+        }
 
 
     /**
