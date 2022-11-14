@@ -1,5 +1,6 @@
 const Members = require("./Members");
 const Helper = require("./Helper");
+const { calendarFormat } = require("moment");
 
     const courseData = [
         {
@@ -8,15 +9,15 @@ const Helper = require("./Helper");
         },
          {
             cName : 'Front End',
+            cFee : 3000
+        },
+        {
+            cName : 'Back End',
             cFee : 5000
         },
         {
-            cName : 'Full Stack',
-            cFee : 8000
-        },
-        {
             cName : 'PM',
-            cFee : 3000
+            cFee : 8000 
         }
     ]
 
@@ -25,13 +26,12 @@ class Students extends Members {
     // variables (Class/Field variables)
     studentData = {
         sId: 0,
-        sStatus: 'Not Enrolled',
+        sStatus: 'Enrolled',
         sCourseName: '',
         sTopicsCovered: '',
         sBalance: 0,
         sGrade: '',
     }
-    
 
     static studentIdTracker = 100;
 
@@ -83,8 +83,30 @@ class Students extends Members {
      */
 
 
+    // number, 4-string
+    enrollment(age, courseName, name, email, address) {
+        if (age < 16) {
+            console.log('Student has to be of age 16 or above');
+        } else {
+            const cObject = this.verifyCourseName(courseName);
+            if (!cObject) {
+                console.log(`Please enter a valid course name. Course entered is "${courseName}"`);
+            } else {
+                // start enrollment process
+                this.memberData.mName = Helper.toTitleCase(name);
+                this.memberData.mAge = age;
+                this.memberData.mEmail = email;
+                this.memberData.mAddress = address.toUpperCase()
+                this.studentData.sBalance = cObject.cFee;
+                this.studentData.sCourseName = cObject.cName;
+                Students.studentIdTracker++;
+                this.studentData.sId = `S${Students.studentIdTracker}`;
+                console.log(`Congratulations for enrolling in ${cObject.cName} course.\nStudent id: S${Students.studentIdTracker}`);
+            }
+        }
+    }
 
-        /**
+    /**
      * verifyCourseName***************************************************************************************************************
      * Programmer:
      * This function is to verify 
@@ -97,32 +119,29 @@ class Students extends Members {
      * 
      */
 
-         verifyCourseName(courseName) {
-            return courseData.find(
-                cData => cData.cName.toUpperCase().localeCompare(courseName.toUpperCase()) === 0
-            )
-        }
-
+    verifyCourseName(courseName) {
+        return courseData.find(
+            cData => cData.cName.toUpperCase().localeCompare(courseName.toUpperCase()) === 0
+        )
+    }
 
     /**
-     *  getProfile************************************************************************************************************************
-     *  Programmer:
-     *  student has to their student-id as input
-     *  if provided student-id is SAME as of this student's id
-     *      Print profile as below:
+     * getProfile************************************************************************************************************************
+     * Programmer:
+     * student has to their student-id as input
+     * if provided student-id is SAME as of this student's id
+     *     Print profile as below:
      *          Profile:::
-     *              Id: student-name
-     *              Name: student-name
-     *              Email: student-email
-     *              Balance: student-balance
-     *              Address: student-address
-     *  otherwise
+     *          Id: student-id
+     *          Name: student-name
+     *          Email: student-email
+     *          Balance: student-balance
+     *          Address: student-address
+     * otherwise
      *      show message -> You have entered invalid id. Invalid id: SXXX
-     * 
      */
-
- 
-
+   
+    
     getProfile(providedStudentId) {
 
         if (this.studentData.sId === providedStudentId){
@@ -133,6 +152,8 @@ class Students extends Members {
                 Email: ${this.memberData.mEmail}
                 Balance: ${this.studentData.sBalance}
                 Status: ${this.studentData.sStatus}
+                course: ${this.studentData.sCourseName}
+                address: ${this.memberData.mAddress}
                 ----------------------\n`
             );
          } else{
@@ -141,9 +162,8 @@ class Students extends Members {
 
          }
     }
-        
 
-     // changeName********************************************************************************************************************************
+    // changeName********************************************************************************************************************************
     // Programmer: Serkan
     /**
      * student has to provide newName and their student-id as input
@@ -156,7 +176,8 @@ class Students extends Members {
      *      show message -> You have entered invalid id. Invalid id: SXXX
      */
 
-     changeName (newStudentName, studentId){
+
+    changeName (newStudentName, studentId){
         if ( studentId === this.studentData.sId){
             if (newStudentName !== this.memberData.mName){
                 this.memberData.mName = newStudentName;
@@ -169,7 +190,7 @@ class Students extends Members {
         }       
     }
 
-    // changeCourse*******************************************************************************************************************************
+// changeCourse*******************************************************************************************************************************
     // Programmer: Dren
     /**
      * student has to provide newName and their student-id as input
@@ -180,8 +201,27 @@ class Students extends Members {
      *          show message, You are already registered with same name.
      *  otherwise
      *      show message -> You have entered invalid id. Invalid id: SXXX
-     */
+     */    
 
+changeCourse (newCourseName, studentId){
+        if ( studentId === this.studentData.sId){
+            const cCourseName = this.verifyCourseName(newCourseName);
+            if(!cCourseName)
+            {
+                console.log(`You are already registered in the ${newCourseName} course`);
+            }
+            else
+            {
+                this.studentData.sBalance = cCourseName.cFee
+                this.studentData.sCourseName = cCourseName.cName
+                console.log(`Your course has been updated to ${newCourseName.toUpperCase()}`);
+            }
+        }
+        else
+        {
+            console.log(`You have entered invalid id. Invalid id: ${studentId}`);
+        }
+    }
 
     // makePayment********************************************************************************************************************************
     //Programmer: Dorvan
@@ -196,6 +236,25 @@ class Students extends Members {
      *  otherwise
      *      show message -> You have entered invalid id. Invalid id: SXXX
      */
+
+
+    makePayment(paymentAmount, studentId){
+        if(studentId === this.studentData.sId){
+            if(this.studentData.sBalance > 0)
+            {
+                this.studentData.sBalance = this.studentData.sBalance - paymentAmount
+                console.log(`Thank you for making payment. Your updated balance is ${this.studentData.sBalance}`);
+            }
+            else
+            {
+                console.log('No payment is required at this time.');
+            }
+        }
+        else
+        {
+            console.log(`You have entered invalid id. Invalid id: ${studentId}`);
+        }
+    }
 
     //changeAddress*******************************************************************************************************************************
     //Programmer: Konstancia
@@ -212,6 +271,19 @@ class Students extends Members {
      * 
      */
 
+    changeAddress(newAddress, studentId){
+        if(this.studentData.sId === studentId){
+            if(newAddress.toLowerCase() !== this.memberData.mAddress.toLowerCase()){
+                this.memberData.mAddress = newAddress.toUpperCase()
+                console.log(`Address is changed to ${newAddress} successfully.`);
+            }else{
+                console.log('You are already have same address in the system.');
+            }
+        }else{
+            console.log(`You have entered invalid id. Invalid id: ${studentId}`);
+        }
+    }
+
     //dropFromCourse*******************************************************************************************************************************
     //Programmer: Roberta
     /**
@@ -223,9 +295,9 @@ class Students extends Members {
      *          show message, You have entered invalid student-id
      */
 
-     dropFromCourse(providedStudentId){
 
-
+  
+    dropFromCourse(providedStudentId){
         if (this.studentData.sId === providedStudentId){
             if(this.studentData.sStatus.toLowerCase().localeCompare('Enrolled'.toLocaleLowerCase()) === 0){
                 this.studentData.sStatus = 'Dropped';
@@ -244,4 +316,4 @@ class Students extends Members {
 }
 
 
-module.exports = Students; 
+module.exports = Students;
