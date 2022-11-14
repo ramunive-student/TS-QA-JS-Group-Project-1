@@ -83,9 +83,14 @@ class Students extends Members {
      */
 
 
-    // number, 4-string
-    enrollment(age, courseName, name, email, address) {
-        if (age < 16) {
+// enrollment as a constructor
+
+constructor(age, courseName, name, email, address) {
+    super();    // to execute parent constructor
+    if (age <= 0 || courseName.length === 0 || name.length === 0 || email.length === 0 || address.length === 0) {
+        throw 'incomplete data';
+    } else {
+        if (age <= 16) {
             console.log('Student has to be of age 16 or above');
         } else {
             const cObject = this.verifyCourseName(courseName);
@@ -96,15 +101,17 @@ class Students extends Members {
                 this.memberData.mName = Helper.toTitleCase(name);
                 this.memberData.mAge = age;
                 this.memberData.mEmail = email;
-                this.memberData.mAddress = address.toUpperCase()
+                this.memberData.mAddress = address.toUpperCase();
                 this.studentData.sBalance = cObject.cFee;
                 this.studentData.sCourseName = cObject.cName;
+                this.studentData.sStatus = 'Enrolled'
                 Students.studentIdTracker++;
                 this.studentData.sId = `S${Students.studentIdTracker}`;
                 console.log(`Congratulations for enrolling in ${cObject.cName} course.\nStudent id: S${Students.studentIdTracker}`);
             }
         }
     }
+}
 
     /**
      * verifyCourseName***************************************************************************************************************
@@ -150,10 +157,12 @@ class Students extends Members {
                 Id: ${this.studentData.sId}
                 Name: ${this.memberData.mName}
                 Email: ${this.memberData.mEmail}
+                Address: ${this.memberData.mAddress}
+                Course Name: ${this.studentData.sCourseName}
                 Balance: ${this.studentData.sBalance}
-                Status: ${this.studentData.sStatus}
-                course: ${this.studentData.sCourseName}
-                address: ${this.memberData.mAddress}
+                Student Status: ${this.studentData.sStatus}
+                
+                
                 ----------------------\n`
             );
          } else{
@@ -177,15 +186,20 @@ class Students extends Members {
      */
 
 
-    changeName (newStudentName, studentId){
-        if ( studentId === this.studentData.sId){
-            if (newStudentName !== this.memberData.mName){
+     changeName (newStudentName, studentId){
+        if ( studentId === this.studentData.sId)
+        {
+            if (newStudentName !== this.memberData.mName)
+            {
                 this.memberData.mName = newStudentName;
                 console.log(`Name is changed to '${newStudentName}' successfully`);
-            } else {
+            } 
+            else 
+            {
                 console.log('You are already registered with same name.');
             }
-        } else {
+        } else 
+        {
             console.log(`You have entered invalid id. Invalid id: ${studentId}`);
         }       
     }
@@ -271,11 +285,11 @@ changeCourse (newCourseName, studentId){
      * 
      */
 
-    changeAddress(newAddress, studentId){
+     changeAddress(newAddress, studentId){
         if(this.studentData.sId === studentId){
             if(newAddress.toLowerCase() !== this.memberData.mAddress.toLowerCase()){
                 this.memberData.mAddress = newAddress.toUpperCase()
-                console.log(`Address is changed to ${newAddress} successfully.`);
+                console.log(`Address is changed to ${newAddress.toUpperCase()} successfully.`);
             }else{
                 console.log('You are already have same address in the system.');
             }
