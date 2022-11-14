@@ -217,17 +217,17 @@ constructor(age, courseName, name, email, address) {
      *      show message -> You have entered invalid id. Invalid id: SXXX
      */    
 
-changeCourse (newCourseName, studentId){
+     changeCourse (newCourseName, studentId){
         if ( studentId === this.studentData.sId){
-            const cCourseName = this.verifyCourseName(newCourseName);
-            if(!cCourseName)
+            const dren = this.verifyCourseName(newCourseName);
+            if(!dren)
             {
                 console.log(`You are already registered in the ${newCourseName} course`);
             }
             else
             {
-                this.studentData.sBalance = cCourseName.cFee
-                this.studentData.sCourseName = cCourseName.cName
+                this.studentData.sBalance = dren.cFee
+                this.studentData.sCourseName = dren.cName
                 console.log(`Your course has been updated to ${newCourseName.toUpperCase()}`);
             }
         }
@@ -252,7 +252,7 @@ changeCourse (newCourseName, studentId){
      */
 
 
-    makePayment(paymentAmount, studentId){
+     makePayment(paymentAmount, studentId){
         if(studentId === this.studentData.sId){
             if(this.studentData.sBalance > 0)
             {
@@ -285,7 +285,7 @@ changeCourse (newCourseName, studentId){
      * 
      */
 
-     changeAddress(newAddress, studentId){
+    changeAddress(newAddress, studentId){
         if(this.studentData.sId === studentId){
             if(newAddress.toLowerCase() !== this.memberData.mAddress.toLowerCase()){
                 this.memberData.mAddress = newAddress.toUpperCase()
