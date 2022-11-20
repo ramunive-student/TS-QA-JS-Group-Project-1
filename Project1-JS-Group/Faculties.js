@@ -154,25 +154,53 @@ class Faculties extends Members {
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  changeCourse (newCourseName, facultyId){
-    if ( facultyId === this.facultyData.fId){
-        const fCourseName = this.verifyCourseName(newCourseName);
-        if(!fCourseName)
-        {
-            console.log(`You are already registered in the ${newCourseName} course`);
-        }
-        else
-        {
-             this.facultyData.fSalary = fCourseName.salary         
-            this.facultyData.fCourseName = fCourseName.fName
-            console.log(`Your course has been updated to ${newCourseName.toUpperCase()}`);
-        }
+//   changeCourse (newCourseName, facultyId){
+//     if ( facultyId === this.facultyData.fId){
+//         const fCourseName = this.verifyCourseName(newCourseName);
+//         if(!fCourseName)
+//         {
+//             console.log(`You are already registered in the ${newCourseName} course`);
+//         }
+//         else
+//         {
+//              this.facultyData.fSalary = fCourseName.salary         
+//             this.facultyData.fCourseName = fCourseName.fName
+//             console.log(`Your course has been updated to ${newCourseName.toUpperCase()}`);
+//         }
+//     }
+//     else
+//     {
+//         console.log(`You have entered invalid id. Invalid id: ${facultyId}`);
+//     }
+// }
+
+changeCourse(newCourseName, facultyId) {
+  if (facultyId === this.facultyData.fId) {
+    const courseName = this.verifyCourseName(newCourseName);
+
+    if(courseName){
+      if(this.facultyData.fCourseName.toLowerCase() === newCourseName.toLowerCase()){
+        console.log(`You are already registered to teach the ${newCourseName.toUpperCase()} course`);
+      }else{
+        this.facultyData.fCourseName = courseName.cName;
+        this.facultyData.fSalary = courseName.salary;
+        console.log(
+          `Your course has been updated to ${newCourseName.toUpperCase()}`
+        );
+
+
+      }
+
+    }else{
+      console.log(`You have entered an invalid course name. Invalid course: ${newCourseName}`);
     }
-    else
-    {
-        console.log(`You have entered invalid id. Invalid id: ${facultyId}`);
-    }
+
+  } else {
+    console.log(`You have entered invalid id. Invalid id: ${facultyId}`);
+  }
 }
+
+
   //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   gradeStudent(providedStudentId, grade) {
@@ -203,6 +231,17 @@ class Faculties extends Members {
       console.log(
         `\nYou have entered an invalid faculty-id. Faculty-id entered was ${providedFacultyId}\n`
       );
+    }
+  }
+
+  //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  showMySalary(facultyId) {
+    if (facultyId === this.facultyData.fId) {
+      {
+        console.log(`your salary is $${this.facultyData.fSalary}`);
+      }
+    } else {
+      console.log(`You have entered invalid id. Invalid id: ${facultyId}`);
     }
   }
 

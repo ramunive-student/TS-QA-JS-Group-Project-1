@@ -5,9 +5,10 @@ const Faculties = require("./Faculties");
 //student test cases
 try {
 
-    // const s1 = new Students(20, 'qA', 'deePAk', 's1@test.com', 'USA');
-    // s1.getProfile('S103');
-    // s1.getProfile('S101');
+//    const s1 = new Students(20, 'qA', 'deePAk', 's1@test.com', 'USA');
+//     s1.getProfile('S103');
+//     s1.getProfile('S101');
+    
     // s1.changeName('suSAn sMiTH');
     // s1.getProfile('S101');
     // console.log('****************** Expected: student name successfully changed');
@@ -79,15 +80,33 @@ try {
 
     f1.getProfile('F101');
 
-    
+    f1.changeCourse('qA', 'F101');
+    console.log('****************** Expected: same course name\n');
+
+    f1.changeCourse('hello', 'F101');
+    console.log('****************** Expected: invalid course name\n');
+
+    f1.changeCourse('qA', '200');
+    console.log('****************** Expected: invalid faculty id\n');
+
+    f1.changeCourse('Pm', 'F101');
+    console.log('****************** Expected: update course\n');
+
+    f1.getProfile('F101');
+
+    f1.showMySalary('F101');
+    console.log('****************** Expected: Show salary\n');
+
+    f1.showMySalary('F200');
+    console.log('****************** Expected: invalid id\n');
 
 
 
 
     
     
-    const f4 = new Faculties(50, 'f4@test.com', 'NY');
-    //console.log('****************** Expected: Cannot proceed with setup due to incomplete data - missing name\n');
+    // const f4 = new Faculties(50, 'f4@test.com', 'NY');
+    // //console.log('****************** Expected: Cannot proceed with setup due to incomplete data - missing name\n');
 
 } catch (e) {
 
