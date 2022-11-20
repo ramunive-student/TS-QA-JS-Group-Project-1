@@ -186,23 +186,19 @@ constructor(age, courseName, name, email, address) {
      */
 
 
-     changeName (newStudentName, studentId){
-        if ( studentId === this.studentData.sId)
-        {
-            if (newStudentName !== this.memberData.mName)
-            {
-                this.memberData.mName = newStudentName;
-                console.log(`Name is changed to '${newStudentName}' successfully`);
-            } 
-            else 
-            {
-                console.log('You are already registered with same name.');
-            }
-        } else 
-        {
-            console.log(`You have entered invalid id. Invalid id: ${studentId}`);
-        }       
-    }
+     changeName(newName, studentId) {
+        if (studentId === this.studentData.studentId) {
+            
+          if (Helper.toTitleCase(newName) !== this.memberData.mName) {
+            this.memberData.mName = Helper.toTitleCase(newName);
+            console.log(`Name is changed to '${this.memberData.mName}' successfully`);
+          } else {
+            console.log("You are already enrolled with same name.");
+          }
+        } else {
+          console.log(`You have entered invalid id. Invalid id: ${studentId}`);
+        }
+      }
 
 // changeCourse*******************************************************************************************************************************
     // Programmer: Dren
