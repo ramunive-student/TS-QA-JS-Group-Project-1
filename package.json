@@ -1,0 +1,25 @@
+{
+  "name": "ts-qa-js-group-project-1",
+  "version": "1.0.0",
+  "description": "Technosoft QA Bootcamp Javascript Group Project 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramunive-student/TS-QA-JS-Group-Project-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramunive-student/TS-QA-JS-Group-Project-1/issues"
+  },
+  "homepage": "https://github.com/ramunive-student/TS-QA-JS-Group-Project-1#readme",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {}
+}
