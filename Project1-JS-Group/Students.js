@@ -34,6 +34,7 @@ class Students extends Members {
     }
 
     static studentIdTracker = 100;
+    
 
     /*
         functions
@@ -108,6 +109,7 @@ constructor(age, courseName, name, email, address) {
                 Students.studentIdTracker++;
                 this.studentData.sId = `S${Students.studentIdTracker}`;
                 console.log(`Congratulations for enrolling in ${cObject.cName} course.\nStudent id: S${Students.studentIdTracker}`);
+                
             }
         }
     }
