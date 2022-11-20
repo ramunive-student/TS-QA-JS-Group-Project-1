@@ -154,25 +154,6 @@ class Faculties extends Members {
 
   //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-//   changeCourse (newCourseName, facultyId){
-//     if ( facultyId === this.facultyData.fId){
-//         const fCourseName = this.verifyCourseName(newCourseName);
-//         if(!fCourseName)
-//         {
-//             console.log(`You are already registered in the ${newCourseName} course`);
-//         }
-//         else
-//         {
-//              this.facultyData.fSalary = fCourseName.salary         
-//             this.facultyData.fCourseName = fCourseName.fName
-//             console.log(`Your course has been updated to ${newCourseName.toUpperCase()}`);
-//         }
-//     }
-//     else
-//     {
-//         console.log(`You have entered invalid id. Invalid id: ${facultyId}`);
-//     }
-// }
 
 changeCourse(newCourseName, facultyId) {
   if (facultyId === this.facultyData.fId) {
