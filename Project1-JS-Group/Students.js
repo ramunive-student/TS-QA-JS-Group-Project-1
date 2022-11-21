@@ -105,7 +105,7 @@ constructor(age, courseName, name, email, address) {
                 this.memberData.mAddress = address.toUpperCase();
                 this.studentData.sBalance = cObject.cFee;
                 this.studentData.sCourseName = cObject.cName;
-                this.studentData.sStatus = 'Enrolled'
+                this.studentData.sStatus = 'Enrolled';
                 Students.studentIdTracker++;
                 this.studentData.sId = `S${Students.studentIdTracker}`;
                 console.log(`Congratulations for enrolling in ${cObject.cName} course.\nStudent id: S${Students.studentIdTracker}`);

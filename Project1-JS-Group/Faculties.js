@@ -2,6 +2,7 @@ const Members = require("./Members");
 const Helper = require("./Helper");
 
 
+
 courseData = [
   {
     cName: "QA",
@@ -87,6 +88,7 @@ class Faculties extends Members {
         this.facultyData.fStatus = "Active";
         Faculties.facultyIdTracker++;
         this.facultyData.fId = `F${Faculties.facultyIdTracker}`;
+        
 
         
 
@@ -141,6 +143,7 @@ class Faculties extends Members {
 
   changeAddress(newAddress, facultyId) {
     if (this.facultyData.fId === facultyId) {
+      
       if (newAddress.toLowerCase() !== this.memberData.mAddress.toLowerCase()) {
         this.memberData.mAddress = newAddress.toUpperCase();
         console.log(`Address is changed to ${newAddress} successfully.`);
@@ -185,14 +188,11 @@ changeCourse(newCourseName, facultyId) {
   //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
   gradeStudent(providedStudentId, grade) {
-    if (this.studentData.sId !== providedStudentId) {
-      console.log(
-        `Student-id is incorrect. Provided Student Id: ${providedStudentId}`
-      );
-    } else {
-      this.facultyData.fDegree = grade.toUpperCase();
-    }
+
+    this.facultyData.fDegree = grade.toUpperCase();
+    
   }
+
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
